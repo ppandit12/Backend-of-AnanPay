@@ -1,6 +1,6 @@
 
 require('dotenv').config();
-const PORT = process.env.PORT || 0;
+const PORT = process.env.PORT || 3000;
 const express = require("express");
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
@@ -90,6 +90,10 @@ server.get('/api/crypto/prices', async (req, res) => {
 });
 
 connect.then(() => console.log("MongoDB connected")).catch(err => console.error("MongoDB connection error:", err));
+
+server.listen(PORT, () => {
+    console.log(`Backend server is running on port ${PORT}`);
+});
 
 // Export for Vercel serverless
 module.exports = server;
