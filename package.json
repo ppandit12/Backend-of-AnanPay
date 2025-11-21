@@ -11,6 +11,7 @@
   "license": "ISC",
   "description": "A simple cryptocurrency wallet",
   "dependencies": {
+    "@bitcoinerlab/secp256k1": "^1.1.1",
     "@emurgo/cardano-serialization-lib-nodejs": "^15.0.0",
     "@mysten/sui.js": "^0.54.1",
     "@noble/secp256k1": "^2.3.0",
@@ -33,7 +34,6 @@
     "multer": "^2.0.1",
     "nodemailer": "^7.0.4",
     "npm": "^11.4.2",
-    "tiny-secp256k1": "^2.2.4",
     "tronweb": "^5.3.2",
     "xrpl": "^4.3.0"
   }

@@ -1,7 +1,7 @@
 const { ethers } = require('ethers');
 const bitcoin = require('bitcoinjs-lib');
 const { ECPairFactory } = require('ecpair');
-const tinysecp = require('tiny-secp256k1');
+const secp256k1 = require('@bitcoinerlab/secp256k1');
 const { Connection, PublicKey, Transaction, SystemProgram, sendAndConfirmTransaction, Keypair, LAMPORTS_PER_SOL } = require('@solana/web3.js');
 const { getOrCreateAssociatedTokenAccount, createTransferInstruction, getAssociatedTokenAddress } = require('@solana/spl-token');
 const xrpl = require('xrpl');
@@ -11,10 +11,9 @@ const { TransactionBlock } = require('@mysten/sui.js/transactions');
 const { Ed25519Keypair } = require('@mysten/sui.js/keypairs/ed25519');
 const { getFullnodeUrl, SuiClient } = require('@mysten/sui.js/client');
 const axios = require('axios');
-const { bech32 } = require('bech32'); // You might need to install this: npm install bech32
-const TransactionModel = require('../models/Transaction'); // Add transaction model
-// Initialize ECPair for Bitcoin-like operations
-const ECPair = ECPairFactory(tinysecp);
+const { bech32 } = require('bech32');
+const TransactionModel = require('../models/Transaction');
+const ECPair = ECPairFactory(secp256k1.secp256k1 || secp256k1);
 
 // Network configurations
 const NETWORKS = {
@@ -849,7 +848,7 @@ exports.sendBitcoin = async (req, res) => {
         }
 
         const network = bitcoin.networks.bitcoin;
-        const ECPair = ECPairFactory(tinysecp);
+        const ECPair = ECPairFactory(secp256k1.secp256k1 || secp256k1);
 
         // Validate private key
         let keyPair;

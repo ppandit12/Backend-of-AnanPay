@@ -5,11 +5,9 @@ const { Ed25519Keypair } = require('@mysten/sui.js/keypairs/ed25519');
 const { getFullnodeUrl, SuiClient } = require('@mysten/sui.js/client');
 const bitcoin = require('bitcoinjs-lib');
 const { ECPairFactory } = require('ecpair');
-const tinysecp = require('tiny-secp256k1');
+const secp256k1 = require('@bitcoinerlab/secp256k1');
 const TransactionModel = require('../models/Transaction');
-
-// Initialize ECPair for Bitcoin operations
-const ECPair = ECPairFactory(tinysecp);
+const ECPair = ECPairFactory(secp256k1.secp256k1 || secp256k1);
 
 // Multi-RPC configurations for EVM chains with fallback support
 const NETWORKS = {

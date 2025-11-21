@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 const { ethers } = require('ethers');
 const bitcoin = require('bitcoinjs-lib');
 const { ECPairFactory } = require('ecpair');
-const tinysecp = require('tiny-secp256k1');
+const secp256k1 = require('@bitcoinerlab/secp256k1');
 const { Keypair } = require('@solana/web3.js');
 const { getAssociatedTokenAddress } = require('@solana/spl-token');
 const xrpl = require('xrpl');
@@ -23,8 +23,7 @@ const { Buffer } = require('buffer');
 
 
 
-// Initialize ECPair with tiny-secp256k1
-const ECPair = ECPairFactory(tinysecp);
+const ECPair = ECPairFactory(secp256k1.secp256k1 || secp256k1);
 
 // Define network for Litecoin (Bitcoin-like)
 const litecoinNetwork = {
