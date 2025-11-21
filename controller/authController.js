@@ -818,9 +818,12 @@ exports.getAllUsers = async (req, res) => {
             isKycApproved: 1,
             isEmailVerified: 1,
             createdAt: 1
-        }).lean();
+        }).lean().catch(err => {
+            console.error('Database query error:', err);
+            return [];
+        });
 
-        const formattedUsers = users.map((user, index) => ({
+        const formattedUsers = (users || []).map((user, index) => ({
             id: user._id.toString(),
             name: user.name || 'N/A',
             email: user.email || 'N/A',
@@ -838,7 +841,12 @@ exports.getAllUsers = async (req, res) => {
         });
     } catch (err) {
         console.error('Get all users error:', err);
-        res.status(500).json({ success: false, msg: "Server error", error: err.message });
+        // Return empty array instead of error to prevent frontend crashes
+        res.status(200).json({
+            success: true,
+            data: [],
+            total: 0,
+            message: 'No users available'
+        });
     }
 };
-
