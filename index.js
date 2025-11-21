@@ -89,13 +89,7 @@ server.get('/api/crypto/prices', async (req, res) => {
   }
 });
 
-//server running
-server.listen(PORT, async () => {
-    try {
-        await connect;
-        console.log("MongoDB connected");
-    } catch (error) {
-        console.log(error);
-    }
-    console.log(`Server running at port ${PORT}`);
-});
+connect.then(() => console.log("MongoDB connected")).catch(err => console.error("MongoDB connection error:", err));
+
+// Export for Vercel serverless
+module.exports = server;
