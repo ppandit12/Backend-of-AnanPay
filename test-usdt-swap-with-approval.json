@@ -1,0 +1,89 @@
+{
+  "description": "Example request for USDT swap with approval address",
+  "examples": {
+    "eth_to_sol_swap": {
+      "fromCoin": "ETH",
+      "privateKey": "your_ethereum_private_key_here",
+      "user_id": "user_123",
+      "slippage": 0.005,
+      "transactionRequest": {
+        "to": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE",
+        "data": "0x...", 
+        "value": "0x0de0b6b3a7640000",
+        "chainId": 1,
+        "gasLimit": "0x21838"
+      }
+    },
+    "usdt_avalanche_swap": {
+      "fromCoin": "USDT",
+      "privateKey": "your_avalanche_private_key_here", 
+      "user_id": "user_123",
+      "slippage": 0.03,
+      "approvalAddress": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE",
+      "transactionRequest": {
+        "to": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE",
+        "data": "0x...",
+        "value": "0x0",
+        "chainId": 43114,
+        "gasLimit": "0x493e0"
+      }
+    },
+    "usdc_ethereum_swap": {
+      "fromCoin": "USDC", 
+      "privateKey": "your_ethereum_private_key_here",
+      "user_id": "user_123",
+      "slippage": 0.02,
+      "approvalAddress": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE",
+      "transactionRequest": {
+        "to": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE",
+        "data": "0x...",
+        "value": "0x0", 
+        "chainId": 1,
+        "gasLimit": "0x493e0"
+      }
+    },
+    "solana_transaction": {
+      "fromCoin": "SOL",
+      "privateKey": "your_solana_private_key_here",
+      "user_id": "user_123",
+      "slippage": 0.01,
+      "transactionRequest": {
+        "data": "AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAQAGCcYMUJHytZHLILOVHvF+B8YA9qGTWSFFEqzrM+VvVjSbHoxPq4mUSUyPHlwSh0RbKRfWDEPHmqlZFi9dYABZjTIKI/NO/NLZ8aID4MZaKz1jVwknx2G8Vej5f1EA4avlaAMGRm/lIRcy/+ytunLDm+e8jOW7xfcSayxDmzpAAAAAKD0N0oI1T+8K47DiJ9N82JyiZvsX3fj3y3zO++Tr3FUGp9UXGMd0yShWY5hpHV62i164o5tLbVxzVVshAAAAAI4pzeE14U/L4hY61x9yIQJ9d1+DAenSl4zEWd+wsnQrAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADe2RMxGvk9Wc9c3vEcJtQnIrM8lUORnUnwyPYhg6ITdOVXu79hjTCp68tryQTSyMpw3aem2fWVgZj+Tkprd5CkBQMABQLAJwkAAwAJA/9DDwAAAAAABAIFBgkA5ydNdw+LXQAHAgABDAIAAACgJSYAAAAAAAgDAAcCNvIjxolS4fK2YKR0OwAAAAABAAAA/wAAAAAAAAAAAAAAAAAgX9F4fv/HQdf3vXqI9ZDL0LySpQA="
+      }
+    }
+  },
+  "network_support": {
+    "usdt_networks": ["ethereum", "bnb", "avalanche", "optimism", "arbitrum"],
+    "usdc_networks": ["ethereum", "bnb", "avalanche", "optimism", "arbitrum"],
+    "token_contracts": {
+      "ethereum": {
+        "USDT": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+        "USDC": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+      },
+      "bnb": {
+        "USDT": "0x55d398326f99059ff775485246999027b3197955", 
+        "USDC": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d"
+      },
+      "avalanche": {
+        "USDT": "0x9702230a8ea53601f5cd2dc00fdbc13d4df4a8c7",
+        "USDC": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E"
+      },
+      "optimism": {
+        "USDT": "0x94b008aa00579c1307b0ef2c499ad98a8ce58e58",
+        "USDC": "0x7f5c764cbc14f9669b88837ca1490cca17c31607"
+      },
+      "arbitrum": {
+        "USDT": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+        "USDC": "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8"
+      }
+    }
+  },
+  "important_notes": [
+    "approvalAddress is REQUIRED for USDT and USDC transactions",
+    "approvalAddress comes from LiFi quote response (estimate.approvalAddress)",
+    "For other tokens (ETH, SOL, etc.), approvalAddress is not required",
+    "Slippage is optional, defaults to 3% (0.03)",
+    "The system will automatically approve tokens before executing swap",
+    "Make sure you have sufficient native tokens for gas fees"
+  ]
+}
